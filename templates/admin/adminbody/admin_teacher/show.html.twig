@@ -1,0 +1,40 @@
+{% extends 'admin/admin_body.html.twig' %}
+
+{% block adminbody %}
+    <h1>Teacher</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ teacher.id }}</td>
+            </tr>
+            <tr>
+                <th>Surname</th>
+                <td>{{ teacher.surname }}</td>
+            </tr>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ teacher.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ teacher.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Position</th>
+                <td>{{ teacher.position }}</td>
+            </tr>
+            <tr>
+                <th>Category</th>
+                <td>{{ teacher.category }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('teacher_index') }}">back to list</a>
+
+    <a href="{{ path('teacher_edit', {'id': teacher.id}) }}">edit</a>
+
+    {{ include('admin/adminbody/admin_teacher/_delete_form.html.twig') }}
+{% endblock %}

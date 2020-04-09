@@ -3,6 +3,23 @@ body {
     font-weight: 600;
     background-color: green;
 }
+nav {
+    display: flex;
+    border: 1px solid black;
+}
+nav .nav-item {
+    width: 25%;
+    height: 70px;
+    line-height: 80px;
+    text-align: center;
+}
+.nav-item a {
+    text-decoration: none;
+    color: white;
+}
+.nav-item a:hover {
+    color: blue;
+}
 .top-header {
     margin: 5px;
     display: flex;

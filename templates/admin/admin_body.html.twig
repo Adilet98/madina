@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'includes/nav/admin_nav.html.twig' %}
+
+    <div class="container">
+        {% block adminbody %}{% endblock %}
+    </div>
+{% endblock %}
