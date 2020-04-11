@@ -2,15 +2,16 @@
 
 namespace App\Form;
 
-use App\Entity\Teacher;
+use App\Entity\Student;
 use App\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use function Doctrine\ORM\QueryBuilder;
 
-class TeacherType extends AbstractType
+class StudentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -24,11 +25,20 @@ class TeacherType extends AbstractType
             ->add('lastname', null, [
                 'label' => 'Отчество'
             ])
-            ->add('position', null, [
-                'label' => 'Должность'
+            ->add('branch', null, [
+                'label' => 'Отделение'
             ])
-            ->add('category', null, [
-                'label' => 'Категория'
+            ->add('shift', null, [
+                'label' => 'Форма обучения'
+            ])
+            ->add('class', null, [
+                'label' => 'Класс'
+            ])
+            ->add('birth', null, [
+                'label' => 'Дата рождения'
+            ])
+            ->add('address', null, [
+                'label' => 'Адрес'
             ])
             ->add('user', EntityType::class, [
                 'label' => 'Пользователь',
@@ -36,7 +46,7 @@ class TeacherType extends AbstractType
                 'query_builder' => function (EntityRepository $er) {
                     $qb = $er->createQueryBuilder('u');
                     return $qb->andWhere($qb->expr()->like('u.roles', '?1'))
-                        ->setParameter(1, '%ROLE_TEACHER%')
+                        ->setParameter(1, '%ROLE_STUDENT%')
                         ->orderBy('u.id', 'ASC');
                 },
                 'choice_label' => 'username'
@@ -47,7 +57,7 @@ class TeacherType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Teacher::class,
+            'data_class' => Student::class,
         ]);
     }
 }

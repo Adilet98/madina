@@ -19,11 +19,6 @@ class Student
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $username;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $surname;
 
     /**
@@ -36,21 +31,40 @@ class Student
      */
     private $lastname;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $branch;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $shift;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $class;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $birth;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $address;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
     }
 
     public function getSurname(): ?string
@@ -85,6 +99,78 @@ class Student
     public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getBranch(): ?string
+    {
+        return $this->branch;
+    }
+
+    public function setBranch(string $branch): self
+    {
+        $this->branch = $branch;
+
+        return $this;
+    }
+
+    public function getShift(): ?string
+    {
+        return $this->shift;
+    }
+
+    public function setShift(string $shift): self
+    {
+        $this->shift = $shift;
+
+        return $this;
+    }
+
+    public function getClass(): ?string
+    {
+        return $this->class;
+    }
+
+    public function setClass(string $class): self
+    {
+        $this->class = $class;
+
+        return $this;
+    }
+
+    public function getBirth(): ?\DateTimeInterface
+    {
+        return $this->birth;
+    }
+
+    public function setBirth(\DateTimeInterface $birth): self
+    {
+        $this->birth = $birth;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
 
         return $this;
     }
