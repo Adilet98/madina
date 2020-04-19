@@ -2,36 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Student;
+use App\Entity\Subject;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method Student|null find($id, $lockMode = null, $lockVersion = null)
- * @method Student|null findOneBy(array $criteria, array $orderBy = null)
- * @method Student[]    findAll()
- * @method Student[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Subject|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Subject|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Subject[]    findAll()
+ * @method Subject[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class StudentRepository extends ServiceEntityRepository
+class SubjectRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Student::class);
-    }
-
-    public function findByGroup($id)
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.groupName = :val')
-            ->setParameter('val', $id)
-            ->orderBy('s.id', 'ASC')
-            ->getQuery()
-            ->getResult()
-            ;
+        parent::__construct($registry, Subject::class);
     }
 
     // /**
-    //  * @return Student[] Returns an array of Student objects
+    //  * @return Subject[] Returns an array of Subject objects
     //  */
     /*
     public function findByExampleField($value)
@@ -48,7 +37,7 @@ class StudentRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Student
+    public function findOneBySomeField($value): ?Subject
     {
         return $this->createQueryBuilder('s')
             ->andWhere('s.exampleField = :val')

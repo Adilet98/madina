@@ -39,6 +39,8 @@ class DefaultController extends AbstractController
      */
     public function redirectRoute()
     {
-        return $this->redirectToRoute('admin');
+        if ($this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('admin');
+        }
     }
 }

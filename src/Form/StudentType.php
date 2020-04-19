@@ -2,11 +2,13 @@
 
 namespace App\Form;
 
+use App\Entity\ClassGroup;
 use App\Entity\Student;
 use App\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use function Doctrine\ORM\QueryBuilder;
@@ -25,17 +27,17 @@ class StudentType extends AbstractType
             ->add('lastname', null, [
                 'label' => 'Отчество'
             ])
-            ->add('branch', null, [
-                'label' => 'Отделение'
-            ])
             ->add('shift', null, [
                 'label' => 'Форма обучения'
             ])
-            ->add('class', null, [
-                'label' => 'Класс'
+            ->add('groupName', EntityType::class, [
+                'label' => 'Класс',
+                'class' => ClassGroup::class,
+                'choice_label' => 'name'
             ])
-            ->add('birth', null, [
-                'label' => 'Дата рождения'
+            ->add('birth', DateType::class, [
+                'label' => 'Дата рождения',
+                'years' => range(1980, 2010)
             ])
             ->add('address', null, [
                 'label' => 'Адрес'

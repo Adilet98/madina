@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\Group;
+use App\Entity\ClassGroup;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method Group|null find($id, $lockMode = null, $lockVersion = null)
- * @method Group|null findOneBy(array $criteria, array $orderBy = null)
- * @method Group[]    findAll()
- * @method Group[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method ClassGroup|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ClassGroup|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ClassGroup[]    findAll()
+ * @method ClassGroup[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class GroupRepository extends ServiceEntityRepository
+class ClassGroupRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Group::class);
+        parent::__construct($registry, ClassGroup::class);
     }
 
     // /**

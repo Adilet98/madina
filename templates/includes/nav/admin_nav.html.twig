@@ -1,8 +1,9 @@
 <div class="container">
     <nav>
         <div class="nav-item"><a href="">Анкетирование</a></div>
-        <div class="nav-item"><a href="">Преподаватели</a></div>
-        <div class="nav-item"><a href="">Ученики</a></div>
-        <div class="nav-item"><a href="">Успеваемость</a></div>
+        <div class="nav-item"><a href="{{ path('user_index') }}">Пользователи</a></div>
+        <div class="nav-item"><a href="{{ path('teacher_index') }}">Преподаватели</a></div>
+        <div class="nav-item"><a href="{{ path('student_index') }}">Ученики</a></div>
+        <div class="nav-item"><a href="{{ path('groups_index') }}">Успеваемость</a></div>
     </nav>
 </div>

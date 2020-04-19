@@ -1,0 +1,9 @@
+{% extends 'admin/admin_body.html.twig' %}
+
+{% block adminbody %}
+    <h1>Создание нового пользователя</h1>
+
+    {{ include('admin/adminbody/admin_user/_form.html.twig') }}
+
+    <a href="{{ path('user_index') }}">Вернуться к списку</a>
+{% endblock %}

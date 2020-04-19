@@ -6,6 +6,8 @@ use App\Entity\Student;
 use App\Entity\Teacher;
 use App\Form\StudentType;
 use App\Form\TeacherType;
+use App\Repository\ClassGroupRepository;
+use App\Repository\GroupRepository;
 use App\Repository\StudentRepository;
 use App\Repository\TeacherRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -175,5 +177,25 @@ class AdminController extends AbstractController
         }
 
         return $this->redirectToRoute('student_index');
+    }
+
+    /**
+     * @Route("/admin/groups/", name="groups_index", methods={"GET"})
+     */
+    public function groups(ClassGroupRepository $classGroupRepository): Response
+    {
+        return $this->render('admin/adminbody/admin_groups/groups.html.twig', [
+            'classGroups' => $classGroupRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/admin/groups/{id}/students", name="group_students_list", methods={"GET"})
+     */
+    public function groupStudents(StudentRepository $studentRepository, int $id): Response
+    {
+        return $this->render('admin/adminbody/admin_groups/group_students.html.twig', [
+            'groupStudents' => $studentRepository->findByGroup($id),
+        ]);
     }
 }

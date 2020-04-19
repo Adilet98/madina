@@ -19,9 +19,6 @@ final class Version20200411172057 extends AbstractMigration
 
     public function up(Schema $schema) : void
     {
-        // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
-
         $this->addSql('ALTER TABLE student DROP FOREIGN KEY FK_B723AF33ED766068');
         $this->addSql('DROP INDEX UNIQ_B723AF33ED766068 ON student');
         $this->addSql('ALTER TABLE student CHANGE username_id user_id INT NOT NULL');
@@ -36,9 +33,6 @@ final class Version20200411172057 extends AbstractMigration
 
     public function down(Schema $schema) : void
     {
-        // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
-
         $this->addSql('ALTER TABLE student DROP FOREIGN KEY FK_B723AF33A76ED395');
         $this->addSql('DROP INDEX UNIQ_B723AF33A76ED395 ON student');
         $this->addSql('ALTER TABLE student CHANGE user_id username_id INT NOT NULL');

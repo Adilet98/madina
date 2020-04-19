@@ -40,17 +40,7 @@ class Student
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $branch;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $shift;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $class;
 
     /**
      * @ORM\Column(type="date")
@@ -61,6 +51,12 @@ class Student
      * @ORM\Column(type="string", length=255)
      */
     private $address;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ClassGroup", inversedBy="students")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $groupName;
 
     public function getId(): ?int
     {
@@ -115,18 +111,6 @@ class Student
         return $this;
     }
 
-    public function getBranch(): ?string
-    {
-        return $this->branch;
-    }
-
-    public function setBranch(string $branch): self
-    {
-        $this->branch = $branch;
-
-        return $this;
-    }
-
     public function getShift(): ?string
     {
         return $this->shift;
@@ -135,18 +119,6 @@ class Student
     public function setShift(string $shift): self
     {
         $this->shift = $shift;
-
-        return $this;
-    }
-
-    public function getClass(): ?string
-    {
-        return $this->class;
-    }
-
-    public function setClass(string $class): self
-    {
-        $this->class = $class;
 
         return $this;
     }
@@ -171,6 +143,18 @@ class Student
     public function setAddress(string $address): self
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    public function getGroupName(): ?ClassGroup
+    {
+        return $this->groupName;
+    }
+
+    public function setGroupName(?ClassGroup $groupName): self
+    {
+        $this->groupName = $groupName;
 
         return $this;
     }

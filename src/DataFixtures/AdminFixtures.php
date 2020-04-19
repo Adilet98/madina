@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\DBAL\Types\RoleEnumType;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -24,7 +25,7 @@ class AdminFixtures extends Fixture
             $admin,
             'qwerty'
         ));
-        $admin->setRoles(['ROLE_ADMIN']);
+        $admin->setRoles([RoleEnumType::ROLE_ADMIN]);
 
         $manager->persist($admin);
         $manager->flush();
