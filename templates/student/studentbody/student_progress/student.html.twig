@@ -1,0 +1,42 @@
+{% extends 'student/student_body.html.twig' %}
+
+{% block studentbody %}
+    <h1>Сабақ үлгерімі</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Оқушы</th>
+                <td>{{ student.surname }} {{ student.firstname }} {{ student.lastname }}</td>
+            </tr>
+            <tr>
+                <th>1-ші тоқсан</th>
+                <td>{{ student.quarterOne }}</td>
+            </tr>
+            <tr>
+                <th>2-ші тоқсан</th>
+                <td>{{ student.quarterTwo }}</td>
+            </tr>
+            <tr>
+                <th>3-ші тоқсан</th>
+                <td>{{ student.quarterThree }}</td>
+            </tr>
+            <tr>
+                <th>4-ші тоқсан</th>
+                <td>{{ student.quarterFour }}</td>
+            </tr>
+            <tr>
+                <th>Жылдық</th>
+                <td>{{ student.year }}</td>
+            </tr>
+            <tr>
+                <th>Экзамен</th>
+                <td>{{ student.exam }}</td>
+            </tr>
+            <tr>
+                <th>Қорытынды</th>
+                <td>{{ student.final }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\LessonTimeRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CabinetRepository")
  */
-class LessonTime
+class Cabinet
 {
     /**
      * @ORM\Id()
@@ -19,21 +19,26 @@ class LessonTime
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $time;
+    private $name;
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTime(): ?string
+    public function getName(): ?string
     {
-        return $this->time;
+        return $this->name;
     }
 
-    public function setTime(string $time): self
+    public function setName(string $name): self
     {
-        $this->time = $time;
+        $this->name = $name;
 
         return $this;
     }

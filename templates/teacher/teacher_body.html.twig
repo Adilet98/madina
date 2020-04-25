@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'includes/nav/teacher_nav.html.twig' %}
+
+    <div class="teacher-body container">
+        {% block teacherbody %}{% endblock %}
+    </div>
+{% endblock %}

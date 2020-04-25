@@ -1,20 +1,20 @@
 {% extends 'admin/admin_body.html.twig' %}
 
 {% block adminbody %}
-    <h1>Ученики</h1>
+    <h1>Оқушылар</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Фамилия</th>
-                <th>Имя</th>
-                <th>Отчество</th>
-                <th>Форма обучения</th>
-                <th>Класс</th>
-                <th>Дата рождения</th>
+                <th>Аты</th>
+                <th>Әкесінің аты</th>
+                <th>Оқу формасы</th>
+                <th>Сынып</th>
+                <th>Туған күні</th>
                 <th>Адрес</th>
-                <th>Действия</th>
+                <th>Әрекеттер</th>
             </tr>
         </thead>
         <tbody>
@@ -29,17 +29,17 @@
                 <td>{{ student.birth ? student.birth|date('Y-m-d') : '' }}</td>
                 <td>{{ student.address }}</td>
                 <td>
-                    <a href="{{ path('student_show', {'id': student.id}) }}">Показать</a>
-                    <a href="{{ path('student_edit', {'id': student.id}) }}">Редактировать</a>
+                    <a href="{{ path('student_show', {'id': student.id}) }}">Көрсету</a>
+                    <a href="{{ path('student_edit', {'id': student.id}) }}">Өңдеу</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="10">Не найдено записей</td>
+                <td colspan="10">Жазбалар табылған жоқ</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('student_new') }}">Создать</a>
+    <a href="{{ path('student_new') }}">Құру</a>
 {% endblock %}

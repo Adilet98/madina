@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -47,9 +49,35 @@ class Teacher
      */
     private $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Schedule", mappedBy="teacher")
+     */
+    private $schedules;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\ClassGroup", inversedBy="teachers")
+     */
+    private $groupNames;
+
+    public function __construct()
+    {
+        $this->schedules = new ArrayCollection();
+        $this->groupNames = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->surname . ' ' . $this->firstname . ' ' . $this->lastname;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getInitials(): ?string
+    {
+        return mb_substr($this->firstname, 0, 1) . '. ' . mb_substr($this->lastname, 0, 1) . '.';
     }
 
     public function getSurname(): ?string
@@ -120,6 +148,63 @@ class Teacher
     public function setUser(User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Schedule[]
+     */
+    public function getSchedules(): Collection
+    {
+        return $this->schedules;
+    }
+
+    public function addSchedule(Schedule $schedule): self
+    {
+        if (!$this->schedules->contains($schedule)) {
+            $this->schedules[] = $schedule;
+            $schedule->setTeacher($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSchedule(Schedule $schedule): self
+    {
+        if ($this->schedules->contains($schedule)) {
+            $this->schedules->removeElement($schedule);
+            // set the owning side to null (unless already changed)
+            if ($schedule->getTeacher() === $this) {
+                $schedule->setTeacher(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ClassGroup[]
+     */
+    public function getGroupNames(): Collection
+    {
+        return $this->groupNames;
+    }
+
+    public function addGroupName(ClassGroup $groupName): self
+    {
+        if (!$this->groupNames->contains($groupName)) {
+            $this->groupNames[] = $groupName;
+        }
+
+        return $this;
+    }
+
+    public function removeGroupName(ClassGroup $groupName): self
+    {
+        if ($this->groupNames->contains($groupName)) {
+            $this->groupNames->removeElement($groupName);
+        }
 
         return $this;
     }

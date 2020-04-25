@@ -1,0 +1,9 @@
+{% extends 'teacher/teacher_body.html.twig' %}
+
+{% block teacherbody %}
+    <h1>Сыныптар</h1>
+
+    {% for classGroup in classGroups %}
+        <a href="{{ path('teacher_schedule_index', {'groupId': classGroup.id}) }}">{{ classGroup.name }}</a><br>
+    {% endfor %}
+{% endblock %}

@@ -1,15 +1,15 @@
 {% extends 'admin/admin_body.html.twig' %}
 
 {% block adminbody %}
-    <h1>Пользователи</h1>
+    <h1>Қолданушылар</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Логин</th>
-                <th>Роль</th>
-                <th>Действия</th>
+                <th>Рөлі</th>
+                <th>Әрекеттер</th>
             </tr>
         </thead>
         <tbody>
@@ -20,18 +20,18 @@
                 <td>{{ user.username }}</td>
                 <td>{{ roles[i]|join(', ') }}</td>
                 <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">Показать</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">Редактировать</a>
+                    <a href="{{ path('user_show', {'id': user.id}) }}">Көрсету</a>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}">Өңдеу</a>
                 </td>
             </tr>
             {% set i = i + 1 %}
         {% else %}
             <tr>
-                <td colspan="5">Не найдено записей</td>
+                <td colspan="5">Жазбалар табылған жоқ</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('user_new') }}">Создать</a>
+    <a href="{{ path('user_new') }}">Құру</a>
 {% endblock %}

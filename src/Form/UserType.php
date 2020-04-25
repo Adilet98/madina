@@ -20,7 +20,7 @@ class UserType extends AbstractType
                 'label' => 'Логин'
             ])
             ->add('roles', ChoiceType::class, [
-                'label' => 'Роль',
+                'label' => 'Рөлі',
                 'choices' => RoleEnumType::getChoices(),
                 'multiple' => true
             ])

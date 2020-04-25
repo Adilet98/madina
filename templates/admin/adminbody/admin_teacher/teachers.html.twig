@@ -1,18 +1,18 @@
 {% extends 'admin/admin_body.html.twig' %}
 
 {% block adminbody %}
-    <h1>Преподаватели</h1>
+    <h1>Мұғалімдер</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Фамилия</th>
-                <th>Имя</th>
-                <th>Отчество</th>
-                <th>Должность</th>
-                <th>Категория</th>
-                <th>Действия</th>
+                <th>Аты</th>
+                <th>Әкесінің аты</th>
+                <th>Қызметі</th>
+                <th>Категориясы</th>
+                <th>Әрекеттер</th>
             </tr>
         </thead>
         <tbody>
@@ -25,17 +25,17 @@
                 <td>{{ teacher.position }}</td>
                 <td>{{ teacher.category }}</td>
                 <td>
-                    <a href="{{ path('teacher_show', {'id': teacher.id}) }}">Показать</a>
-                    <a href="{{ path('teacher_edit', {'id': teacher.id}) }}">Редактировать</a>
+                    <a href="{{ path('teacher_show', {'id': teacher.id}) }}">Көрсету</a>
+                    <a href="{{ path('teacher_edit', {'id': teacher.id}) }}">Өңдеу</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">Не найдено записей</td>
+                <td colspan="7">Жазбалар табылған жоқ</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('teacher_new') }}">Создать</a>
+    <a href="{{ path('teacher_new') }}">Құру</a>
 {% endblock %}

@@ -1,9 +1,9 @@
 {% extends 'admin/admin_body.html.twig' %}
 
 {% block adminbody %}
-    <h1>Классы</h1>
+    <h1>Сыныптар</h1>
 
     {% for classGroup in classGroups %}
-        <a href="{{ path('group_students_list', {id: classGroup.id}) }}">{{ classGroup.name }}</a><br>
+        <a href="{{ path('group_progress_list', {id: classGroup.id}) }}">{{ classGroup.name }}</a><br>
     {% endfor %}
 {% endblock %}

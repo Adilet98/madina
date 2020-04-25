@@ -74,6 +74,16 @@ class User implements UserInterface
         return $this;
     }
 
+    public function hasRole(string $givenRole): bool
+    {
+        foreach ($this->roles as $role) {
+            if ($role === $givenRole)
+                return true;
+        }
+
+        return false;
+    }
+
     /**
      * @see UserInterface
      */

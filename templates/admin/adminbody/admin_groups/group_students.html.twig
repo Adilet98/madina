@@ -1,9 +1,0 @@
-{% extends 'admin/admin_body.html.twig' %}
-
-{% block adminbody %}
-    <h1>Классы</h1>
-
-    {% for groupStudent in groupStudents %}
-        <a href="#">{{ groupStudent.surname }} {{ groupStudent.firstname }} {{ groupStudent.lastname }}</a><br>
-    {% endfor %}
-{% endblock %}

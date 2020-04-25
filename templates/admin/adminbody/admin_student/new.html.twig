@@ -1,9 +1,9 @@
 {% extends 'admin/admin_body.html.twig' %}
 
 {% block adminbody %}
-    <h1>Создание нового ученика</h1>
+    <h1>Оқушыны құру</h1>
 
     {{ include('admin/adminbody/admin_student/_form.html.twig') }}
 
-    <a href="{{ path('student_index') }}">Вернуться к списку</a>
+    <a href="{{ path('admin_student_index') }}">Кері қайту</a>
 {% endblock %}

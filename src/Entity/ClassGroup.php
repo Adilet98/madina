@@ -28,9 +28,26 @@ class ClassGroup
      */
     private $students;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Schedule", mappedBy="classGroup", orphanRemoval=true)
+     */
+    private $schedules;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Teacher", mappedBy="groupNames")
+     */
+    private $teachers;
+
     public function __construct()
     {
         $this->students = new ArrayCollection();
+        $this->schedules = new ArrayCollection();
+        $this->teachers = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 
     public function getId(): ?int
@@ -76,6 +93,65 @@ class ClassGroup
             if ($student->getGroupName() === $this) {
                 $student->setGroupName(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Schedule[]
+     */
+    public function getSchedules(): Collection
+    {
+        return $this->schedules;
+    }
+
+    public function addSchedule(Schedule $schedule): self
+    {
+        if (!$this->schedules->contains($schedule)) {
+            $this->schedules[] = $schedule;
+            $schedule->setClassGroup($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSchedule(Schedule $schedule): self
+    {
+        if ($this->schedules->contains($schedule)) {
+            $this->schedules->removeElement($schedule);
+            // set the owning side to null (unless already changed)
+            if ($schedule->getClassGroup() === $this) {
+                $schedule->setClassGroup(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Teacher[]
+     */
+    public function getTeachers(): Collection
+    {
+        return $this->teachers;
+    }
+
+    public function addTeacher(Teacher $teacher): self
+    {
+        if (!$this->teachers->contains($teacher)) {
+            $this->teachers[] = $teacher;
+            $teacher->addGroupName($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTeacher(Teacher $teacher): self
+    {
+        if ($this->teachers->contains($teacher)) {
+            $this->teachers->removeElement($teacher);
+            $teacher->removeGroupName($this);
         }
 
         return $this;

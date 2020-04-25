@@ -1,7 +1,7 @@
 {% extends 'admin/admin_body.html.twig' %}
 
 {% block adminbody %}
-    <h1>Преподаватель</h1>
+    <h1>Мұғалім</h1>
 
     <table class="table">
         <tbody>
@@ -14,27 +14,27 @@
                 <td>{{ teacher.surname }}</td>
             </tr>
             <tr>
-                <th>Имя</th>
+                <th>Аты</th>
                 <td>{{ teacher.firstname }}</td>
             </tr>
             <tr>
-                <th>Отчество</th>
+                <th>Әкесінің аты</th>
                 <td>{{ teacher.lastname }}</td>
             </tr>
             <tr>
-                <th>Должность</th>
+                <th>Қызметі</th>
                 <td>{{ teacher.position }}</td>
             </tr>
             <tr>
-                <th>Категория</th>
+                <th>Категориясы</th>
                 <td>{{ teacher.category }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('teacher_index') }}">Вернуться к списку</a>
+    <a href="{{ path('admin_teacher_index') }}">Кері қайту</a>
 
-    <a href="{{ path('teacher_edit', {'id': teacher.id}) }}">Редактировать</a>
+    <a href="{{ path('teacher_edit', {'id': teacher.id}) }}">Өңдеу</a>
 
     {{ include('admin/adminbody/admin_teacher/_delete_form.html.twig') }}
 {% endblock %}

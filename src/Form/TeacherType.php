@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\ClassGroup;
 use App\Entity\Teacher;
 use App\Entity\User;
 use Doctrine\ORM\EntityRepository;
@@ -19,19 +20,19 @@ class TeacherType extends AbstractType
                 'label' => 'Фамилия'
             ])
             ->add('firstname', null, [
-                'label' => 'Имя'
+                'label' => 'Аты'
             ])
             ->add('lastname', null, [
-                'label' => 'Отчество'
+                'label' => 'Әкесінің аты'
             ])
             ->add('position', null, [
-                'label' => 'Должность'
+                'label' => 'Қызметі'
             ])
             ->add('category', null, [
-                'label' => 'Категория'
+                'label' => 'Категориясы'
             ])
             ->add('user', EntityType::class, [
-                'label' => 'Пользователь',
+                'label' => 'Қолданушы',
                 'class' => User::class,
                 'query_builder' => function (EntityRepository $er) {
                     $qb = $er->createQueryBuilder('u');
@@ -40,6 +41,12 @@ class TeacherType extends AbstractType
                         ->orderBy('u.id', 'ASC');
                 },
                 'choice_label' => 'username'
+            ])
+            ->add('groupNames', EntityType::class, [
+                'label' => 'Сыныптар',
+                'class' => ClassGroup::class,
+                'multiple' => true,
+                'expanded' => true
             ])
         ;
     }

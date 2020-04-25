@@ -1,0 +1,9 @@
+{% extends 'admin/admin_body.html.twig' %}
+
+{% block adminbody %}
+    <h1>Сыныптар</h1>
+
+    {% for classGroup in classGroups %}
+        <a href="{{ path('admin_schedule_index', {'groupId': classGroup.id}) }}">{{ classGroup.name }}</a><br>
+    {% endfor %}
+{% endblock %}

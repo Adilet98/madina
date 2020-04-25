@@ -1,0 +1,37 @@
+{% extends 'teacher/teacher_body.html.twig' %}
+
+{% block teacherbody %}
+    <h1>Сабақ кестесі</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Сабақ реті</th>
+                <th>Дүйсенбі</th>
+                <th>Сейсенбі</th>
+                <th>Сәрсенбі</th>
+                <th>Бейсенбі</th>
+                <th>Жұма</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for lesson in 1..7 %}
+            <tr>
+                <td>
+                    {{ lesson }}-ші сабақ
+                </td>
+            {% for day in 1..5 %}
+                <td>
+                {% for schedule in schedules %}
+                    {% if schedule.day == day and schedule.lessonTime == lesson %}
+                        "{{ schedule.subject }}"<br>
+                        {{ schedule.teacher.surname }} {{ schedule.teacher.initials }}, {{ schedule.cabinet }} каб.
+                    {% endif %}
+                {% endfor %}
+                </td>
+            {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,11 +1,11 @@
 {% extends 'admin/admin_body.html.twig' %}
 
 {% block adminbody %}
-    <h1>Редактирование преподавателя</h1>
+    <h1>Мұғалімді өңдеу</h1>
 
-    {{ include('admin/adminbody/admin_teacher/_form.html.twig', {'button_label': 'Обновить'}) }}
+    {{ include('admin/adminbody/admin_teacher/_form.html.twig', {'button_label': 'Жаңарту'}) }}
 
-    <a href="{{ path('teacher_index') }}">Вернуться к списку</a>
+    <a href="{{ path('admin_teacher_index') }}">Кері қайту</a>
 
     {{ include('admin/adminbody/admin_teacher/_delete_form.html.twig') }}
 {% endblock %}

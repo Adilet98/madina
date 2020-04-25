@@ -1,0 +1,9 @@
+{% extends 'admin/admin_body.html.twig' %}
+
+{% block adminbody %}
+    <h1>Сабақ кестесін құру</h1>
+
+    {{ form(form) }}
+
+    <a href="{{ path('schedule_groups_index') }}">Кері қайту</a>
+{% endblock %}

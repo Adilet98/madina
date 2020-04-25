@@ -1,0 +1,7 @@
+{% extends 'admin/admin_body.html.twig' %}
+
+{% block adminbody %}
+    <h1>Бағаларды өңдеу</h1>
+        {{ form(form) }}
+    <a href="{{ path('student_progress_edit', {'id': student.id}) }}">Кері қайту</a>
+{% endblock %}

@@ -22,28 +22,28 @@ class StudentType extends AbstractType
                 'label' => 'Фамилия'
             ])
             ->add('firstname', null, [
-                'label' => 'Имя'
+                'label' => 'Аты'
             ])
             ->add('lastname', null, [
-                'label' => 'Отчество'
+                'label' => 'Әкесінің аты'
             ])
             ->add('shift', null, [
-                'label' => 'Форма обучения'
+                'label' => 'Оқу формасы'
             ])
             ->add('groupName', EntityType::class, [
-                'label' => 'Класс',
+                'label' => 'Сынып',
                 'class' => ClassGroup::class,
                 'choice_label' => 'name'
             ])
             ->add('birth', DateType::class, [
-                'label' => 'Дата рождения',
+                'label' => 'Туған күні',
                 'years' => range(1980, 2010)
             ])
             ->add('address', null, [
                 'label' => 'Адрес'
             ])
             ->add('user', EntityType::class, [
-                'label' => 'Пользователь',
+                'label' => 'Қолданушы',
                 'class' => User::class,
                 'query_builder' => function (EntityRepository $er) {
                     $qb = $er->createQueryBuilder('u');

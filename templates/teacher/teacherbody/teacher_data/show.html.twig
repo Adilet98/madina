@@ -1,0 +1,30 @@
+{% extends 'teacher/teacher_body.html.twig' %}
+
+{% block teacherbody %}
+    <h1>Мұғалім</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Фамилия</th>
+                <td>{{ teacher.surname }}</td>
+            </tr>
+            <tr>
+                <th>Аты</th>
+                <td>{{ teacher.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Әкесінің аты</th>
+                <td>{{ teacher.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Қызметі</th>
+                <td>{{ teacher.position }}</td>
+            </tr>
+            <tr>
+                <th>Категориясы</th>
+                <td>{{ teacher.category }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

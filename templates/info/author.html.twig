@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if app.user %}
+        {% if app.user.role("ROLE_ADMIN") %}
+            {% include 'includes/nav/admin_nav.html.twig' %}
+        {% endif %}
+
+        {% if app.user.role("ROLE_TEACHER") %}
+            {% include 'includes/nav/teacher_nav.html.twig' %}
+        {% endif %}
+
+        {% if app.user.role("ROLE_STUDENT") %}
+            {% include 'includes/nav/student_nav.html.twig' %}
+        {% endif %}
+    {% endif %}
+
+    <div class="author-page container">
+        Қарағанды мемлекеттік техникалық университетінің 3 курс студенті
+        Рамазанова Мадина.
+    </div>
+{% endblock %}

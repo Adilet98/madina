@@ -22,7 +22,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/admin/users", name="user_index", methods={"GET"})
+     * @Route("/admin/users", name="admin_user_index", methods={"GET"})
      */
     public function users(UserRepository $userRepository): Response
     {

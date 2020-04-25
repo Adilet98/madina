@@ -1,0 +1,38 @@
+{% extends 'admin/admin_body.html.twig' %}
+
+{% block adminbody %}
+    <h1>Оқушылар</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Оқушы</th>
+            <th>1-ші тоқсан</th>
+            <th>2-ші тоқсан</th>
+            <th>3-ші тоқсан</th>
+            <th>4-ші тоқсан</th>
+            <th>Жылдық</th>
+            <th>Экзамен</th>
+            <th>Қорытынды</th>
+            <th>Әрекеттер</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for groupStudent in groupStudents %}
+        <tr>
+            <td>{{ groupStudent.surname }} {{ groupStudent.firstname }} {{ groupStudent.lastname }}</td>
+            <td>{{ groupStudent.quarterOne }}</td>
+            <td>{{ groupStudent.quarterTwo }}</td>
+            <td>{{ groupStudent.quarterThree }}</td>
+            <td>{{ groupStudent.quarterFour }}</td>
+            <td>{{ groupStudent.year }}</td>
+            <td>{{ groupStudent.exam }}</td>
+            <td>{{ groupStudent.final }}</td>
+            <td>
+                <a href="{{ path('student_progress_edit', {'id': groupStudent.id}) }}">Өңдеу</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
