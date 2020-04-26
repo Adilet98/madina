@@ -4,6 +4,6 @@
     <h1>Сыныптар</h1>
 
     {% for classGroup in classGroups %}
-        <a href="{{ path('group_progress_list', {id: classGroup.id}) }}">{{ classGroup.name }}</a><br>
+        <a href="{{ path('admin_group_students', {id: classGroup.id}) }}">{{ classGroup.name }}</a><br>
     {% endfor %}
 {% endblock %}

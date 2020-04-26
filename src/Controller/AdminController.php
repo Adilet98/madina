@@ -3,16 +3,20 @@
 namespace App\Controller;
 
 use App\Entity\ClassGroup;
+use App\Entity\Grade;
 use App\Entity\Schedule;
 use App\Entity\Student;
+use App\Entity\Subject;
 use App\Entity\Teacher;
 use App\Form\ProgressFormType;
 use App\Form\ScheduleType;
 use App\Form\StudentType;
 use App\Form\TeacherType;
 use App\Repository\ClassGroupRepository;
+use App\Repository\GradeRepository;
 use App\Repository\ScheduleRepository;
 use App\Repository\StudentRepository;
+use App\Repository\SubjectRepository;
 use App\Repository\TeacherRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -194,35 +198,79 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/groups/{id}/progress", name="group_progress_list", methods={"GET"})
+     * @Route("/admin/group/{id}/students", name="admin_group_students", methods={"GET"})
      */
-    public function groupStudentsProgress(StudentRepository $studentRepository, int $id): Response
+    public function studentList(ClassGroupRepository $classGroupRepository, int $id): Response
     {
+        $students = $classGroupRepository->find($id)->getStudents();
+
+        return $this->render('admin/adminbody/admin_progress/student_list.html.twig', [
+            'students' => $students,
+        ]);
+    }
+
+    /**
+     * @Route("/admin/student/progress/{id}", name="admin_student_progress", methods={"GET"})
+     */
+    public function groupStudentProgress(StudentRepository $studentRepository, SubjectRepository $subjectRepository, int $id): Response
+    {
+        $student = $studentRepository->find($id);
+        $subjects = $subjectRepository->findAll();
+
         return $this->render('admin/adminbody/admin_progress/group_students.html.twig', [
-            'groupStudents' => $studentRepository->findByGroup($id),
+            'student' => $student,
+            'subjects' => $subjects,
+            'id' => $id
+        ]);
+    }
+
+    /**
+     * @Route("/admin/student/{id}/progress/create", name="student_progress_create", methods={"GET", "POST"})
+     */
+    public function progressCreate(Request $request, StudentRepository $studentRepository, int $id): Response
+    {
+        $grade = new Grade();
+
+        $form = $this->createForm(ProgressFormType::class, $grade);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($grade);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('admin_student_progress', [
+                'id' => $id
+            ]);
+        }
+
+        return $this->render('admin/adminbody/admin_progress/edit.html.twig', [
+            'id' => $id,
+            'form' => $form->createView(),
         ]);
     }
 
     /**
      * @Route("/admin/student/progress/{id}/edit", name="student_progress_edit", methods={"GET", "POST"})
      */
-    public function progressEdit(Request $request, StudentRepository $studentRepository, int $id): Response
+    public function progressEdit(Request $request, GradeRepository $gradeRepository, int $id): Response
     {
-        $student = $studentRepository->find($id);
+        $grade = $gradeRepository->find($id);
+        $student = $grade->getStudent();
 
-        $form = $this->createForm(ProgressFormType::class, $student);
+        $form = $this->createForm(ProgressFormType::class, $grade);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('group_progress_list', [
-                'id' => $student->getGroupName()->getId()
+            return $this->redirectToRoute('admin_student_progress', [
+                'id' => $student->getId()
             ]);
         }
 
         return $this->render('admin/adminbody/admin_progress/edit.html.twig', [
-            'student' => $student,
+            'id' => $student->getId(),
             'form' => $form->createView(),
         ]);
     }

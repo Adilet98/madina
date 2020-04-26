@@ -1,0 +1,9 @@
+{% extends 'teacher/teacher_body.html.twig' %}
+
+{% block teacherbody %}
+    <h1>Оқушылар</h1>
+
+    {% for student in students %}
+        <a href="{{ path('teacher_student_progress', {'id': student.id}) }}">{{ student.surname }} {{ student.firstname }} {{ student.lastname }}</a><br>
+    {% endfor %}
+{% endblock %}

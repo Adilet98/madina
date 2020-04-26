@@ -6,7 +6,7 @@
     <table class="table">
         <thead>
         <tr>
-            <th>Оқушы</th>
+            <th>Пәннің аты</th>
             <th>1-ші тоқсан</th>
             <th>2-ші тоқсан</th>
             <th>3-ші тоқсан</th>
@@ -18,21 +18,27 @@
         </tr>
         </thead>
         <tbody>
-        {% for groupStudent in groupStudents %}
+        {% for subject in subjects %}
         <tr>
-            <td>{{ groupStudent.surname }} {{ groupStudent.firstname }} {{ groupStudent.lastname }}</td>
-            <td>{{ groupStudent.quarterOne }}</td>
-            <td>{{ groupStudent.quarterTwo }}</td>
-            <td>{{ groupStudent.quarterThree }}</td>
-            <td>{{ groupStudent.quarterFour }}</td>
-            <td>{{ groupStudent.year }}</td>
-            <td>{{ groupStudent.exam }}</td>
-            <td>{{ groupStudent.final }}</td>
-            <td>
-                <a href="{{ path('teacher_progress_edit', {'id': groupStudent.id}) }}">Өңдеу</a>
-            </td>
+            <td>{{ subject.name }}</td>
+            {% for grade in student.grades %}
+                {% if grade.subject.name == subject.name %}
+                    <td>{{ grade.quarterOne }}</td>
+                    <td>{{ grade.quarterTwo }}</td>
+                    <td>{{ grade.quarterThree }}</td>
+                    <td>{{ grade.quarterFour }}</td>
+                    <td>{{ grade.year }}</td>
+                    <td>{{ grade.exam }}</td>
+                    <td>{{ grade.final }}</td>
+                    <td>
+                        <a href="{{ path('teacher_student_progress_edit', {'id': grade.id}) }}">Өңдеу</a>
+                    </td>
+                {% endif %}
+            {% endfor %}
         </tr>
         {% endfor %}
         </tbody>
     </table>
+
+    <a href="{{ path('teacher_student_progress_create', {'id': id}) }}">Құру</a>
 {% endblock %}

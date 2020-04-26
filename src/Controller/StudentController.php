@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\ScheduleRepository;
 use App\Repository\StudentRepository;
+use App\Repository\SubjectRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -39,13 +40,15 @@ class StudentController extends AbstractController
     /**
      * @Route("/student/progress", name="student_progress", methods={"GET"})
      */
-    public function studentProgress(StudentRepository $studentRepository): Response
+    public function studentProgress(SubjectRepository $subjectRepository, StudentRepository $studentRepository): Response
     {
+        $subjects = $subjectRepository->findAll();
         $student = $studentRepository->findOneBy([
             'user' => $this->getUser()
         ]);
 
         return $this->render('student/studentbody/student_progress/student.html.twig', [
+            'subjects' => $subjects,
             'student' => $student,
         ]);
     }

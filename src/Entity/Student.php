@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -59,39 +61,19 @@ class Student
     private $groupName;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Grade", mappedBy="student", orphanRemoval=true)
      */
-    private $quarterOne;
+    private $grades;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $quarterTwo;
+    public function __construct()
+    {
+        $this->grades = new ArrayCollection();
+    }
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $quarterThree;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $quarterFour;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $year;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $exam;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $final;
+    public function __toString()
+    {
+        return $this->surname . ' ' . $this->firstname . ' ' . $this->lastname;
+    }
 
     public function getId(): ?int
     {
@@ -194,86 +176,33 @@ class Student
         return $this;
     }
 
-    public function getQuarterOne(): ?int
+    /**
+     * @return Collection|Grade[]
+     */
+    public function getGrades(): Collection
     {
-        return $this->quarterOne;
+        return $this->grades;
     }
 
-    public function setQuarterOne(?int $quarterOne): self
+    public function addGrade(Grade $grade): self
     {
-        $this->quarterOne = $quarterOne;
+        if (!$this->grades->contains($grade)) {
+            $this->grades[] = $grade;
+            $grade->setStudent($this);
+        }
 
         return $this;
     }
 
-    public function getQuarterTwo(): ?int
+    public function removeGrade(Grade $grade): self
     {
-        return $this->quarterTwo;
-    }
-
-    public function setQuarterTwo(?int $quarterTwo): self
-    {
-        $this->quarterTwo = $quarterTwo;
-
-        return $this;
-    }
-
-    public function getQuarterThree(): ?int
-    {
-        return $this->quarterThree;
-    }
-
-    public function setQuarterThree(?int $quarterThree): self
-    {
-        $this->quarterThree = $quarterThree;
-
-        return $this;
-    }
-
-    public function getQuarterFour(): ?int
-    {
-        return $this->quarterFour;
-    }
-
-    public function setQuarterFour(?int $quarterFour): self
-    {
-        $this->quarterFour = $quarterFour;
-
-        return $this;
-    }
-
-    public function getYear(): ?int
-    {
-        return $this->year;
-    }
-
-    public function setYear(?int $year): self
-    {
-        $this->year = $year;
-
-        return $this;
-    }
-
-    public function getExam(): ?int
-    {
-        return $this->exam;
-    }
-
-    public function setExam(?int $exam): self
-    {
-        $this->exam = $exam;
-
-        return $this;
-    }
-
-    public function getFinal(): ?int
-    {
-        return $this->final;
-    }
-
-    public function setFinal(?int $final): self
-    {
-        $this->final = $final;
+        if ($this->grades->contains($grade)) {
+            $this->grades->removeElement($grade);
+            // set the owning side to null (unless already changed)
+            if ($grade->getStudent() === $this) {
+                $grade->setStudent(null);
+            }
+        }
 
         return $this;
     }

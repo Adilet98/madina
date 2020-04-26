@@ -2,7 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Grade;
 use App\Entity\Student;
+use App\Entity\Subject;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -42,6 +45,14 @@ class ProgressFormType extends AbstractType
                 'label' => 'Қорытынды',
                 'required' => false
             ])
+            ->add('subject', EntityType::class, [
+                'label' => 'Пәннің аты',
+                'class' => Subject::class
+            ])
+            ->add('student', EntityType::class, [
+                'label' => 'Оқушы',
+                'class' => Student::class
+            ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Сақтау'
             ])
@@ -51,7 +62,7 @@ class ProgressFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Student::class,
+            'data_class' => Grade::class,
         ]);
     }
 }

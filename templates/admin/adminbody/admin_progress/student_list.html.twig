@@ -1,0 +1,9 @@
+{% extends 'admin/admin_body.html.twig' %}
+
+{% block adminbody %}
+    <h1>Оқушылар</h1>
+
+    {% for student in students %}
+        <a href="{{ path('admin_student_progress', {'id': student.id}) }}">{{ student.surname }} {{ student.firstname }} {{ student.lastname }}</a><br>
+    {% endfor %}
+{% endblock %}
