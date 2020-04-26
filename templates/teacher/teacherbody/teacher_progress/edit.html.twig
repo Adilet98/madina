@@ -1,6 +1,6 @@
-{% extends 'admin/admin_body.html.twig' %}
+{% extends 'teacher/teacher_body.html.twig' %}
 
-{% block adminbody %}
+{% block teacherbody %}
     <h1>Бағаларды өңдеу</h1>
         {{ form(form) }}
     <a href="{{ path('teacher_group_progress', {'groupId': student.groupName.id}) }}">Кері қайту</a>

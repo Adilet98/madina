@@ -1,0 +1,34 @@
+{% extends 'teacher/teacher_body.html.twig' %}
+
+{% block teacherbody %}
+    <h1>Оқу жоспары</h1>
+
+    <table class="table">
+        <thead>
+            <th>Дата</th>
+            <th>Сабақтың тақырыбы</th>
+            <th>Үй жұмысы</th>
+            <th>Мұғалімнің ескертпелері</th>
+            <th>Әрекеттер</th>
+        </thead>
+        <tbody>
+        {% for plan in plans %}
+            <tr>
+                <td>{{ plan.date|date('d.m') }}</td>
+                <td>{{ plan.topic }}</td>
+                <td>
+                {% if plan.homework == true %}
+                    Иә
+                {% else %}
+                    Жоқ
+                {% endif %}
+                </td>
+                <td>{{ plan.notes }}</td>
+                <td><a href="{{ path('teacher_plan_edit', {'id': plan.id}) }}">Өңдеу</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('teacher_plan_create') }}">Құру</a>
+{% endblock %}

@@ -46,7 +46,7 @@ class ScheduleType extends AbstractType
                 'label' => 'Кабинет'
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Құру'
+                'label' => 'Сақтау'
             ])
         ;
     }

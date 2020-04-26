@@ -1,0 +1,12 @@
+{% extends 'teacher/teacher_body.html.twig' %}
+
+{% block teacherbody %}
+    <h1>Оқу жоспарын өңдеу</h1>
+        {{ form(form) }}
+
+    {% if id %}
+        <a href="{{ path('teacher_plan_delete', {'id': id}) }}">Жою</a><br>
+    {% endif %}
+
+    <a href="{{ path('teacher_plan') }}">Кері қайту</a>
+{% endblock %}

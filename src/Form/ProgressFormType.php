@@ -43,7 +43,7 @@ class ProgressFormType extends AbstractType
                 'required' => false
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Өңдеу'
+                'label' => 'Сақтау'
             ])
         ;
     }

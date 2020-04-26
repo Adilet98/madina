@@ -59,10 +59,16 @@ class Teacher
      */
     private $groupNames;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Plan", mappedBy="teacher", orphanRemoval=true)
+     */
+    private $plans;
+
     public function __construct()
     {
         $this->schedules = new ArrayCollection();
         $this->groupNames = new ArrayCollection();
+        $this->plans = new ArrayCollection();
     }
 
     public function __toString()
@@ -204,6 +210,37 @@ class Teacher
     {
         if ($this->groupNames->contains($groupName)) {
             $this->groupNames->removeElement($groupName);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Plan[]
+     */
+    public function getPlans(): Collection
+    {
+        return $this->plans;
+    }
+
+    public function addPlan(Plan $plan): self
+    {
+        if (!$this->plans->contains($plan)) {
+            $this->plans[] = $plan;
+            $plan->setTeacher($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlan(Plan $plan): self
+    {
+        if ($this->plans->contains($plan)) {
+            $this->plans->removeElement($plan);
+            // set the owning side to null (unless already changed)
+            if ($plan->getTeacher() === $this) {
+                $plan->setTeacher(null);
+            }
         }
 
         return $this;
